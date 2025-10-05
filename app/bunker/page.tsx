@@ -1,18 +1,17 @@
 'use client';
 
 import BunkerChat from '@/components/BunkerChat';
-import PageBanner from '@/components/PageBanner';
+
 
 export default function BunkerPage() {
   return (
     <div className="space-y-6">
-      <PageBanner src="/images/banners/bunker-hero.png" alt="The Bunker — Token Chat" />
       <section className="relative overflow-hidden rounded-2xl border border-white/10">
-        <div className="relative h-[220px] w-full">
+        <div className="relative h-[420px] w-full">
           <img
-            src="/images/bunker-banner.png"
+            src="/images/banners/bunker-hero.png"
             alt="The Bunker"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />

@@ -14,6 +14,7 @@ const LINKS = [
   { href: '/leaderboard', label: 'Leaderboard' },   // ← added
   { href: '/faq', label: 'FAQ' },
   { href: '/support', label: 'Support' },
+  { href: '/bunker', label: 'Bunker Chat' },
 ];
 
 export default function Navbar() {
