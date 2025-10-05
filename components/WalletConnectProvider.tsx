@@ -1,52 +1,61 @@
-'use client'
+'use client';
 
-import '@rainbow-me/rainbowkit/styles.css'
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import { WagmiConfig, configureChains, createConfig } from 'wagmi'
-import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
-import { useMemo } from 'react'
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  RainbowKitProvider,
+  getDefaultConfig,
+  darkTheme,
+} from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
+import { base, baseSepolia } from 'wagmi/chains';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactNode, useMemo } from 'react';
 
-const base = {
-  id: 8453,
-  name: 'Base',
-  network: 'base',
-  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-  rpcUrls: { default: { http: ['https://mainnet.base.org'] } },
-  blockExplorers: { default: { name: 'BaseScan', url: 'https://basescan.org' } },
-}
+const PROJECT_ID =
+  process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'trench-town-dev';
 
-const baseSepolia = {
-  id: 84532,
-  name: 'Base Sepolia',
-  network: 'base-sepolia',
-  nativeCurrency: { name: 'SepoliaETH', symbol: 'ETH', decimals: 18 },
-  rpcUrls: { default: { http: ['https://sepolia.base.org'] } },
-  blockExplorers: { default: { name: 'BaseScan', url: 'https://sepolia.basescan.org' } },
-}
+export default function WalletConnectProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  // Use base-sepolia for dev by default
+  const TARGET = (process.env.NEXT_PUBLIC_CHAIN || 'base-sepolia').toLowerCase();
 
-export default function WalletConnectProvider({ children }: { children: React.ReactNode }) {
-  const TARGET = (process.env.NEXT_PUBLIC_TARGET || 'base-sepolia').toLowerCase()
-  const chain = useMemo(() => (TARGET === 'base' ? base : baseSepolia), [TARGET])
+  const chains = useMemo(
+    () => (TARGET === 'base' ? [base] : [baseSepolia, base]),
+    [TARGET]
+  );
 
-  const { chains, publicClient } = configureChains(
-    [chain] as any,
-    [jsonRpcProvider({ rpc: () => ({ http: chain.rpcUrls.default.http[0] }) })] as any
-  )
+  const config = useMemo(
+    () =>
+      getDefaultConfig({
+        appName: 'Trench Town',
+        projectId: PROJECT_ID,
+        chains,
+        ssr: true,
+      }),
+    [chains]
+  );
 
-  const { connectors } = getDefaultWallets({
-    appName: 'Trench Town',
-    projectId: 'trench-town',
-    chains,
-  })
+  const queryClient = useMemo(() => new QueryClient(), []);
 
-  const config = createConfig({ autoConnect: true, connectors, publicClient })
   return (
-    <WagmiConfig config={config}>
-      <RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
-    </WagmiConfig>
-  )
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider
+          theme={darkTheme({
+            accentColor: '#1E90FF',
+            borderRadius: 'large',
+            overlayBlur: 'small',
+          })}
+        >
+          {children}
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
 }
-
 
 
 
