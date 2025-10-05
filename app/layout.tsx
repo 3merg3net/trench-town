@@ -1,36 +1,34 @@
+// app/layout.tsx
 import './globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import type { Metadata } from 'next';
 import WalletConnectProvider from '@/components/WalletConnectProvider';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer'; // make sure this exists (server component)
 
-export const metadata = {
-  title: 'Trench Town — Bond Strong on Base',
-  description: 'From the trenches we rise. A Base-native launchpad with anti-rug mechanics.',
+export const metadata: Metadata = {
+  title: 'Trench Town',
+  description: 'Bond-first launchpad on Base.',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#0A84FF" />
-      </head>
-      <body className="min-h-screen">
+      {/* bg image + overlay handled in globals.css */}
+      <body className="min-h-screen text-white">
         <WalletConnectProvider>
-          <div className="max-w-5xl mx-auto px-4 py-6">
-            <header className="mb-6 border-b border-white/10 pb-4">
-              <Navbar />
-            </header>
-            <main className="pb-6">{children}</main>
-            <Footer />
-          </div>
+          <Navbar />
+          <main className="max-w-6xl mx-auto px-4 py-6">{children}</main>
+          <Footer />
         </WalletConnectProvider>
       </body>
     </html>
   );
 }
+
 
 
 

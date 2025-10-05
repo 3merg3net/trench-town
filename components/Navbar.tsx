@@ -1,15 +1,17 @@
+// components/Navbar.tsx
 'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useEffect, useState } from 'react';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-const NAV = [
+const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/tokens', label: 'Tokens' },
   { href: '/deploy', label: 'Deploy' },
   { href: '/trench-bag', label: 'Trench Bag' },
+  { href: '/leaderboard', label: 'Leaderboard' },   // ← added
   { href: '/faq', label: 'FAQ' },
   { href: '/support', label: 'Support' },
 ];
@@ -18,83 +20,61 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  // Close the mobile menu when route changes
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    setOpen(false); // close sheet when route changes
+  }, [pathname]);
+
+  const LinkItem = ({ href, label }: { href: string; label: string }) => (
+    <Link
+      href={href}
+      className={`px-3 py-2 rounded hover:bg-white/10 ${
+        pathname === href ? 'text-white font-semibold' : 'text-white/70'
+      }`}
+    >
+      {label}
+    </Link>
+  );
 
   return (
-    <nav className="sticky top-0 z-40 bg-black/70 backdrop-blur border-b border-white/10">
-      <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between">
-        {/* Left: Brand */}
+    <nav className="w-full sticky top-0 z-40 backdrop-blur bg-black/40 border-b border-white/10">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Brand */}
         <Link href="/" className="flex items-center gap-2">
           <img
             src="/images/wordmark-light.png"
             alt="Trench Town"
-            className="h-8 md:h-10 w-auto"
+            className="h-20 w-auto"
           />
         </Link>
 
-        {/* Center: Tabs */}
-        <div className="hidden md:flex items-center gap-4">
-          {NAV.map((item) => {
-            const active =
-              item.href === '/'
-                ? pathname === '/'
-                : pathname.startsWith(item.href);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`px-2 py-1 text-sm rounded ${
-                  active
-                    ? 'text-white font-semibold bg-white/10'
-                    : 'text-white/70 hover:text-white'
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-1">
+          {LINKS.map((l) => <LinkItem key={l.href} {...l} />)}
         </div>
 
-        {/* Right: Wallet */}
+        {/* Right: wallet */}
         <div className="hidden md:block">
           <ConnectButton showBalance={false} chainStatus="icon" />
         </div>
 
-        {/* Mobile: simple menu */}
+        {/* Mobile toggle */}
         <button
-          className="md:hidden px-2 py-1 rounded border border-white/10 text-white/80"
-          onClick={() => setOpen((s) => !s)}
-          aria-label="Toggle navigation"
+          className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded bg-white/10 border border-white/10"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle Menu"
         >
-          {open ? 'Close' : 'Menu'}
+          {open ? '✖' : '☰'}
         </button>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile sheet */}
       {open && (
-        <div className="md:hidden border-t border-white/10 bg-black">
-          <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2">
-            {NAV.map((item) => {
-              const active =
-                item.href === '/'
-                  ? pathname === '/'
-                  : pathname.startsWith(item.href);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`px-2 py-2 rounded ${
-                    active
-                      ? 'text-white font-semibold bg-white/10'
-                      : 'text-white/80 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <div className="pt-2">
+        <div className="md:hidden border-t border-white/10 bg-black/70">
+          <div className="max-w-6xl mx-auto px-4 py-2 flex flex-col gap-1">
+            {LINKS.map((l) => (
+              <LinkItem key={l.href} {...l} />
+            ))}
+            <div className="py-2">
               <ConnectButton showBalance={false} chainStatus="icon" />
             </div>
           </div>

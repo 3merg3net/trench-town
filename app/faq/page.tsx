@@ -74,7 +74,7 @@ export default function FAQPage() {
     <div className="space-y-8">
       {/* Header / Hero */}
       <section className="relative overflow-hidden rounded-2xl border border-white/10">
-        <div className="relative h-[200px] w-full">
+        <div className="relative h-[320px] w-full">
           <img
             src="/images/banners/faq-hero.png"
             alt="FAQ"

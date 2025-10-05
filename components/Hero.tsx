@@ -6,7 +6,7 @@ export default function Hero() {
       <img
         src="/images/banners/home-hero.png"
         alt="Trench Town — Bond Strong on Base"
-        className="w-full h-[1260px] md:h-[540px] object-contain"
+        className="w-full h-[1060px] md:h-[540px] object-contain"
       />
 
       {/* Readability gradient */}
