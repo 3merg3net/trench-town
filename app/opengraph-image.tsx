@@ -1,9 +1,10 @@
-import { ImageResponse } from 'next/og';
+// app/opengraph-image.tsx
+import { ImageResponse } from 'next/og'
 
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
+export const size = { width: 1200, height: 630 }
+export const contentType = 'image/png'
 
-export default function OpengraphImage() {
+export default function OpenGraphImage() {
   return new ImageResponse(
     (
       <div
@@ -11,25 +12,56 @@ export default function OpengraphImage() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          background:
-            'radial-gradient(800px 400px at 10% 0%, rgba(65,234,212,.25), transparent 60%), radial-gradient(800px 400px at 90% 0%, rgba(127,90,240,.22), transparent 60%), #0a0b0f',
-          color: 'white',
-          padding: 64,
-          fontFamily: 'Inter, system-ui',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          background: 'linear-gradient(135deg, #020307 0%, #0a0b0f 60%, #001933 100%)',
+          fontFamily: 'system-ui, Segoe UI, Helvetica, Arial, sans-serif',
+          color: '#e0e6f0',
+          letterSpacing: '-0.02em',
+          textAlign: 'center',
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            {/* simple icon */}
-            <div style={{ width: 64, height: 64, background: 'linear-gradient(90deg,#41EAD4,#7F5AF0)', borderRadius: 16, opacity: .2 }} />
-            <div style={{ fontFamily: 'Orbitron', fontSize: 56, letterSpacing: 2 }}>
-              TRENCH <span style={{ opacity: .65 }}>TOWN</span>
-            </div>
-          </div>
-          <div style={{ fontSize: 28, opacity: .85 }}>Most SAFU launchpad on Base</div>
+        <div
+          style={{
+            fontSize: 100,
+            fontWeight: 900,
+            background: 'linear-gradient(90deg, #007bff 10%, #00aaff 40%, #d2a93d 90%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            textTransform: 'uppercase',
+            lineHeight: 1.1,
+          }}
+        >
+          TRENCH&nbsp;TOWN
+        </div>
+
+        <div
+          style={{
+            fontSize: 28,
+            marginTop: 24,
+            color: '#c8d0e0',
+            opacity: 0.85,
+          }}
+        >
+          Bond-Strong Launchpad on Base
+        </div>
+
+        <div
+          style={{
+            marginTop: 60,
+            fontSize: 22,
+            color: '#808b9c',
+            letterSpacing: '0.1em',
+          }}
+        >
+          ⚡ HOLD THE LINE • STAY BASED ⚡
         </div>
       </div>
     ),
-    { ...size }
-  );
+    {
+      ...size,
+    }
+  )
 }
+

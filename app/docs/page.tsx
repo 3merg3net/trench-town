@@ -28,7 +28,7 @@ export default function DocsPage() {
             src="/images/hero-banner-degen.png"
             alt="Docs"
             className="w-full h-full object-cover"
-            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+            
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
           <div className="absolute bottom-5 left-5">

@@ -8,7 +8,15 @@ import Footer from '@/components/Footer'; // make sure this exists (server compo
 export const metadata: Metadata = {
   title: 'Trench Town',
   description: 'Bond-first launchpad on Base.',
+   icons: {
+    icon: '/favicon.png',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
 };
+
+
+
 
 export default function RootLayout({
   children,
