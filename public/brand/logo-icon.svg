@@ -1,0 +1,12 @@
+<svg width="256" height="256" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Trench Town Icon">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#41EAD4"/>
+      <stop offset="100%" stop-color="#7F5AF0"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#g)" opacity=".18"/>
+  <path d="M18 36c.8-6.8 7.4-12 14-12s13.2 5.2 14 12h-6.5c-1.1 0-2 .9-2 2H26.5c0-1.1-.9-2-2-2H18z" fill="#41EAD4" opacity=".85"/>
+  <path d="M24 42h16v3H35v7h-6v-7h-5v-3z" fill="#7F5AF0" opacity=".95"/>
+  <path d="M12 48l4-2 2 2-6 4zM52 48l-4-2-2 2 6 4z" fill="#41EAD4" opacity=".45"/>
+</svg>

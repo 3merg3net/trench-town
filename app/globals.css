@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Keep globals simple & robust */
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply bg-black text-white;
+  background-image: url('/images/landing-bg.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+/* simple link style */
+a { @apply underline underline-offset-4 hover:opacity-80; }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Keep globals simple & robust */
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply bg-black text-white;
+  background-image: url('/images/landing-bg.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+/* simple link style */
+a { @apply underline underline-offset-4 hover:opacity-80; }
+
+/* soft readable card over images */
+.readable {
+  background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35));
+  backdrop-filter: saturate(120%) blur(1px);
+}
+
+
