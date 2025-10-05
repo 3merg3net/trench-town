@@ -50,8 +50,8 @@ export default function Footer() {
             <Image
               src="/images/wordmark-light.png"
               alt="Trench Town"
-              width={180}
-              height={42}
+              width={280}
+              height={82}
               className="h-9 w-auto object-contain"
             />
             <span className="text-xs text-white/70 hidden md:inline">
@@ -94,7 +94,7 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <div className="text-xs text-white/70">
+          <div className="text-xs text-white/100">
             © {year} Trench Town — Bond strong. Stay SAFU.
           </div>
         </div>
